@@ -1,6 +1,6 @@
 # Onlinexam
 2018在线考试系统
-完成管理员模块班级管理的增加、删除、修改功能
+完成管理员模块班级管理的修改功能
 public class StuClassModifyServlet extends HttpServlet {
 	private IStuClassService stu = new StuClassService();
 	/*
@@ -35,4 +35,26 @@ public class StuClassModifyServlet extends HttpServlet {
 		req.getRequestDispatcher("/stuClassQueryServlet").forward(req, resp);
 	}
 	
+}
+完成管理员模块课程管理的增加功能
+public class CourseAddServlet extends HttpServlet {
+	private ICourseService cs = new CourseService();
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//super.doGet(req, resp);
+		req.getRequestDispatcher("manager/courseadd.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//super.doPost(req, resp);
+		String cName = req.getParameter("cname");
+		Course course = new Course();
+		course.setCname(cName);
+		cs.addCourse(cName);
+		resp.sendRedirect(req.getContextPath() + "/courseQueryServlet");
+	}
 }
