@@ -36,3 +36,25 @@ public class StuClassModifyServlet extends HttpServlet {
 	}
 	
 }
+完成课程增加信息
+public class CourseAddServlet extends HttpServlet {
+	private ICourseService cs = new CourseService();
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//super.doGet(req, resp);
+		req.getRequestDispatcher("manager/courseadd.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//super.doPost(req, resp);
+		String cName = req.getParameter("cname");
+		Course course = new Course();
+		course.setCname(cName);
+		cs.addCourse(cName);
+		resp.sendRedirect(req.getContextPath() + "/courseQueryServlet");
+	}
+}
